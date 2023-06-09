@@ -16,9 +16,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Deps
         run: |
-          git clone git@github.com:OnionBrowser/OnionBrowser.git
-          cd OnionBrowser
-          git checkout 2.X
+          #git clone git@github.com:OnionBrowser/OnionBrowser.git
+          #cd OnionBrowser
+          #git checkout 2.X
           pod repo update
           pod install
           open OnionBrowser2.xcworkspacet
