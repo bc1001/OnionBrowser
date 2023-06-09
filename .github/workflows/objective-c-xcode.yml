@@ -19,9 +19,9 @@ jobs:
           pod repo update
           pod install
       - name: Build
-        run:  xcodebuild -project OnionBrowser.xcodeproj -scheme OnionBrowser -archivePath OnionBrowser.xcarchive archive  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+        run:  xcodebuild -workspace OnionBrowser.xcworkspace -scheme OnionBrowser -archivePath OnionBrowser.xcarchive archive  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       - name: Pack
-        run: zip -r artifact.zip Clone-Calculator.xcarchive 
+        run: zip -r artifact.zip OnionBrowser.xcarchive 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
