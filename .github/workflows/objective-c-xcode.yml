@@ -16,12 +16,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Deps
         run: |
-          #git clone git@github.com:OnionBrowser/OnionBrowser.git
-          #cd OnionBrowser
-          #git checkout 2.X
           pod repo update
           pod install
-          open OnionBrowser2.xcworkspacet
       - name: Build
         run:  xcodebuild -project OnionBrowser.xcodeproj -scheme OnionBrowser -archivePath OnionBrowser.xcarchive archive  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       - name: Pack
