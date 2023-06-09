@@ -1,0 +1,34 @@
+name: Xcode - Build and Analyze
+
+on:
+  push:
+    branches: [ "3.X" ]
+  pull_request:
+    branches: [ "3.X" ]
+
+jobs:
+  build:
+    name: Build and analyse default scheme using xcodebuild command
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Deps
+        run: |
+          git clone git@github.com:OnionBrowser/OnionBrowser.git
+          cd OnionBrowser
+          git checkout 2.X
+          pod repo update
+          pod install
+          open OnionBrowser2.xcworkspacet
+      - name: Build
+        run:  xcodebuild -project OnionBrowser.xcodeproj -scheme OnionBrowser -archivePath OnionBrowser.xcarchive archive  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      - name: Pack
+        run: zip -r artifact.zip Clone-Calculator.xcarchive 
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: artifact.zip
+          retention-days: 5
